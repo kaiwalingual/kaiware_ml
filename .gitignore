@@ -1,0 +1,11 @@
+/.idea
+/venv
+
+/dataset
+/quick_dataset
+
+mymodel.h5
+pairs.json
+
+__pycache__
+*.pyc
