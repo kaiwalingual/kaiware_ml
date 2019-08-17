@@ -9,7 +9,7 @@ from loader import load
 import json
 
 batch_size = 20
-num_classes = 6
+num_classes = 5
 epoch = 10
 
 img_rows, img_cols = 128, 128

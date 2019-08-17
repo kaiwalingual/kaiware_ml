@@ -23,14 +23,30 @@ def main():
 
     model = load_model(args.model)
 
-    imgarray = np.array([img_to_array(load_img(Path(args.testpath), target_size=(img_rows, img_cols)))])
+    base_dir = Path(args.testpath)
+
+    imgarray = []
+
+    for f in base_dir.iterdir():
+        img = load_img(f, target_size=(img_rows, img_cols))
+        arr = img_to_array(img)
+        imgarray.append(arr)
+
+    imgarray = np.array(imgarray)
 
     preds = model.predict(imgarray, batch_size=imgarray.shape[0])
+
+    avg = 0
+    count = 0
     for pred in preds:
         predR = np.round(pred)
         for pre_i in np.arange(len(predR)):
             if predR[pre_i] == 1:
-                print(f"num is '{pairs[str(pre_i)]}'")
+                # print(f"num is '{pairs[str(pre_i)]}'")
+                avg += int(pairs[str(pre_i)])
+                count += 1
+    avg /= count
+    print(round(avg))
 
 
 if __name__ == '__main__':
